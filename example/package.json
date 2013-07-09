@@ -15,7 +15,8 @@
     "express": "3.2.6",
     "swig": "~0.14.0",
     "consolidate": "~0.9.1",
-    "nconf": "~0.6.7"
+    "nconf": "~0.6.7",
+    "moment": "~2.1.0"
   },
   "devDependencies": {
     "grunt": "~0.4.1",

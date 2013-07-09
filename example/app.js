@@ -1,5 +1,6 @@
 var express = require('express'), 
     cons = require('consolidate'),
+    moment = require('moment'),
     swig = require('swig'),
     http = require('http'),
     path = require('path');
@@ -7,6 +8,37 @@ var express = require('express'),
 var routes = require('./routes');
 var app = express();
 
+app.locals({
+  time_converter: function(utcSeconds) {
+    var d = new Date(0);
+    d.setUTCSeconds(utcSeconds);
+    var dateTime = d.getMonth() + '/' + d.getDate() + '/' +  d.getFullYear() + ' ';
+    var hour = d.getHours();
+    var a = 'am';
+    if(hour === 0) hour = 12;
+    if(hour > 12) {
+      hour = d.getHours() - 12;
+      a = 'pm';
+    }
+
+    dateTime = dateTime + '' + hour;
+
+    if(d.getMinutes() === 0)
+      dateTime = dateTime + ':' + d.getMinutes() + '0';
+    else 
+      dateTime = dateTime = ':' + d.getMinutes();
+
+    dateTime = dateTime + '' + a;
+
+    return dateTime;
+  },
+
+  date_converter: function(utcSeconds) {
+    var d = new Date(0);
+    d.setUTCSeconds(utcSeconds);
+    return d.toLocaleDateString();
+  }
+});
 // all environments
 app.set('port', process.env.PORT || 3000);
 app.engine('.html', cons.swig);
@@ -27,6 +59,7 @@ swig.init({
 // development only
 if ('development' == app.get('env')) {
   app.use(express.errorHandler());
+  app.locals.isDebug = true;
 }
 
 app.get('/', routes.index);

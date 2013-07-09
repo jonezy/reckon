@@ -9,8 +9,9 @@ exports.index = function(req, res){
 
   var lat = 43.6532;
   var lon = -79.3832;
-  
+
   reckoner.get({lat:lat,lon:lon}, function(data) {
-    res.render('index', { results:data});
+    console.log();
+    res.render('index', { results:data, fullResults:JSON.stringify(data, undefined, 2) });
   });
 };

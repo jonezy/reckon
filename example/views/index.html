@@ -3,16 +3,11 @@
 {% block content %}
 <div class="row">
   <div class="column16">
-    <h1 id="currentDate"></h1>
+    <h3> {{ date_converter(results.currently.time }}</h3>
   </div>
   <div class="column4">
     <h4>Current</h4>
     <p>{{ results.currently.summary}}</p>
-    <script>
-      var d = new Date(0);
-      d.setUTCSeconds({{ results.currently.time }});
-      document.getElementById('currentDate').innerText = d.toLocaleDateString();
-    </script>
   </div>
   <div class="column4">
     <h4>Soon</h4>
@@ -21,6 +16,25 @@
   <div class="column4">
     <h4>Later</h4>
     <p>{{ results.hourly.summary}}</p>
+    {% for d in results.hourly.data %}
+      {{ time_converter(d.time) }} <br /> {{ d.summary }}<br /><br />
+    {% endfor %}
+  </div>
+  <div class="column4">
+    <h4>This week</h4>
+    <p>{{ results.daily.summary}}</p>
+    {% for d in results.daily.data %}
+    {{ date_converter(d.time) }} <br /> {{ d.summary }}<br /><br />
+    {% endfor %}
   </div>
 </div>
+ <div class="row">
+    <div class="column16">
+      <pre>
+        {{ fullResults }}
+      </pre>
+
+    </div>
+
+ </div>
 {% endblock %}
