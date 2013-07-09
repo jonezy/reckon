@@ -1,0 +1,26 @@
+{% extends 'layout.html' %}
+
+{% block content %}
+<div class="row">
+  <div class="column16">
+    <h1 id="currentDate"></h1>
+  </div>
+  <div class="column4">
+    <h4>Current</h4>
+    <p>{{ results.currently.summary}}</p>
+    <script>
+      var d = new Date(0);
+      d.setUTCSeconds({{ results.currently.time }});
+      document.getElementById('currentDate').innerText = d.toLocaleDateString();
+    </script>
+  </div>
+  <div class="column4">
+    <h4>Soon</h4>
+    <p>{{ results.minutely.summary}}</p>
+  </div>
+  <div class="column4">
+    <h4>Later</h4>
+    <p>{{ results.hourly.summary}}</p>
+  </div>
+</div>
+{% endblock %}
