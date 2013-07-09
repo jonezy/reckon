@@ -1,0 +1,22 @@
+{
+  "name": "reckon",
+  "version": "0.0.0",
+  "description": "a node wrapper for the forecast.io api",
+  "main": "lib/reckon.js",
+  "scripts": {
+    "test": "mocha -w -R nyan"
+  },
+  "author": "Chris Jones <chris@jonezy.org>",
+  "repository": {
+    "type": "git",
+    "url": "git://github.com/jonezy/reckon.git"
+  },
+  "license": "BSD",
+  "dependencies": {
+    "request": "~2.22.0"
+  },
+  "devDependencies": {
+    "mocha": "",
+    "should": ""
+  }
+}
