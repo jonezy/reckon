@@ -62,7 +62,7 @@ if ('development' == app.get('env')) {
   app.locals.isDebug = true;
 }
 
-app.get('/', routes.index);
+app.get('/:loc?', routes.index);
 
 http.createServer(app).listen(app.get('port'), function(){
   console.log('Express server listening on port ' + app.get('port'));

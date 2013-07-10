@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html>
 <head>
-  <title>Weather in Liberty Village</title>
+  <title>Weather</title>
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <link rel="stylesheet" href="/css/bootstrap.css" />
   <link rel="stylesheet" href="/css/bootstrap.flat.css" />
@@ -9,9 +9,42 @@
   <link rel="stylesheet" href="/css/sex.css" />
 </head>
 <body>
-  {% include 'nav.html' %}
   <div class="container16">
     {% block content %}{% endblock %}
   </div>
+  <script src="/js/jquery-2.0.3.min.js"></script>
+  <script>
+    $(function() {
+      var doLocate = false;
+      var path = window.location.pathname;
+      if(path.length <= 1) doLocate = true;
+      if(path.length > 1) {
+        path = path.split(',');
+        if(path.length === 0)
+          doLocate = true;
+      }
+
+      if (doLocate && navigator.geolocation) {
+         navigator.geolocation.getCurrentPosition(success, error);
+      } else {
+         error('not supported');
+      } 
+    });
+
+    function success(position) {
+      console.log(position);
+      var lat = position.coords.latitude.toString().substr(0,7);
+      var lon = position.coords.longitude.toString().substr(0,7);
+      var url_update = '/' + lat + ',' + lon;
+      window.history.pushState(null, window.title, url_update);
+      window.history.go();
+      //parent.window.location = parent.window.location.origin + '/' + position.coords.latitude.substr(0,7) + ',' + position.coords.longitude.substr(0,7);
+    }
+
+    function error(err) {
+
+    }
+
+  </script>
 </body>
 </html>
