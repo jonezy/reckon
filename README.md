@@ -5,7 +5,7 @@ api](http://developer.forecast.io). It
 provides a simple way of accessing the amazing weather data they
 provide!
 
-    // instantiate shakes like so
+    // instantiate reckon like so
     var reckoner = new Reckon({apiKey:'your api key from
 developer.forecast.io});
     
