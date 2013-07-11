@@ -1,10 +1,12 @@
 {% extends 'layout.html' %}
 
 {% block content %}
+{% if results && fullResults %} 
 <div class="row">
-  <h1>  {{ location }} {{ date_converter(results.currently.time }}</h1>
+  <h1>{{ location }} <small>{{ date_converter(results.currently.time }}</small></h1>
   <h2>Right now?  <strong class="text-info">{{ results.currently.summary}}</strong></h2>
-  <h3>Later on? <strong class="text-info">{{ results.minutely.summary}}</strong></h3>
+  <h2>Real soon? <strong class="text-info">{{ results.minutely.summary}}</strong></h2>
+  <h3><strong class="text-info">{{ results.hourly.summary}}</strong></h3>
 
 </div>
 <div class="row">
@@ -39,8 +41,14 @@
       <pre>
         {{ fullResults }}
       </pre>
-
     </div>
+ </div>
+ {% else %}
+ <div class="row">
+   <div class="column16">
+     <h1>Figuring out where you are and getting you some data...</h1>
+   </div>
 
  </div>
+ {% endif %}
 {% endblock %}

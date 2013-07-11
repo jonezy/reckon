@@ -32,13 +32,11 @@
     });
 
     function success(position) {
-      console.log(position);
       var lat = position.coords.latitude.toString().substr(0,7);
       var lon = position.coords.longitude.toString().substr(0,7);
       var url_update = '/' + lat + ',' + lon;
       window.history.pushState(null, window.title, url_update);
       window.history.go();
-      //parent.window.location = parent.window.location.origin + '/' + position.coords.latitude.substr(0,7) + ',' + position.coords.longitude.substr(0,7);
     }
 
     function error(err) {

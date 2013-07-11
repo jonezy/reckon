@@ -14,7 +14,6 @@ exports.index = function(req, res){
     var locs = req.params.loc.split(',');
     lat = locs[0];
     lon = locs[1];
-  }
 
   var geo_url = "http://maps.googleapis.com/maps/api/geocode/json?latlng=<lat>,<lon>&sensor=true";
   reckoner.get({lat:lat,lon:lon}, function(data) {
@@ -27,7 +26,6 @@ exports.index = function(req, res){
       var city = address_data.results[0].address_components[4].short_name;
       var country = address_data.results[0].address_components[7].short_name;
 
-      console.log("%s, %s, %s", hood, city, country);
       res.render('index', {
         location: hood + ', ' + city + ', ' + country,
         results:data,
@@ -35,4 +33,12 @@ exports.index = function(req, res){
       });
     });
   });
+  }
+   else {
+      res.render('index', {
+        results:null,
+        fullResults:null 
+      });
+
+   }
 };
