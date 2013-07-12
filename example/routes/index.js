@@ -25,11 +25,14 @@ exports.index = function(req, res){
       var hood = address_data.results[0].address_components[2].short_name;
       var city = address_data.results[0].address_components[4].short_name;
       var country = address_data.results[0].address_components[7].short_name;
+      var temps = todaysTemps(data);
 
       res.render('index', {
         location: hood + ', ' + city + ', ' + country,
         results:data,
-        fullResults:JSON.stringify(data, undefined, 2) 
+        fullResults:JSON.stringify(data, undefined, 2) ,
+        todaysHigh: Array.max(temps),
+        todaysLow: Array.min(temps)
       });
     });
   });
@@ -39,6 +42,27 @@ exports.index = function(req, res){
         results:null,
         fullResults:null 
       });
-
    }
 };
+
+var todaysTemps = function(data) {
+  var hours = data.hourly.data;
+  var temps = [];
+  for(var hour in hours) {
+    var today = new Date();
+    var date = new Date(0);
+    date.setTime(hours[hour].time*1000);
+    if(date.getDate() == today.getDate()) temps.push(Math.round(hours[hour].temperature));
+  }
+
+  return temps;
+};
+
+Array.max = function(array) {
+  return Math.max.apply(Math, array);
+};
+
+Array.min = function(array) {
+  return Math.min.apply(Math, array);
+};
+

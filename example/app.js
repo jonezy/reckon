@@ -10,33 +10,11 @@ var app = express();
 
 app.locals({
   time_converter: function(utcSeconds) {
-    var d = new Date(0);
-    d.setUTCSeconds(utcSeconds);
-    var dateTime = d.getMonth() + '/' + d.getDate() + '/' +  d.getFullYear() + ' ';
-    var hour = d.getHours();
-    var a = 'am';
-    if(hour === 0) hour = 12;
-    if(hour > 12) {
-      hour = d.getHours() - 12;
-      a = 'pm';
-    }
-
-    dateTime = dateTime + '' + hour;
-
-    if(d.getMinutes() === 0)
-      dateTime = dateTime + ':' + d.getMinutes() + '0';
-    else 
-      dateTime = dateTime = ':' + d.getMinutes();
-
-    dateTime = dateTime + '' + a;
-
-    return dateTime;
+    return moment.unix(utcSeconds).format("M/D/YYYY hh:mm a");
   },
 
   date_converter: function(utcSeconds) {
-    var d = new Date(0);
-    d.setUTCSeconds(utcSeconds);
-    return d.toLocaleDateString();
+    return moment.unix(utcSeconds).format("MMMM D, YYYY");
   }
 });
 // all environments

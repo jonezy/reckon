@@ -20,8 +20,7 @@
       if(path.length <= 1) doLocate = true;
       if(path.length > 1) {
         path = path.split(',');
-        if(path.length === 0)
-          doLocate = true;
+        if(path.length === 0) doLocate = true;
       }
 
       if (doLocate && navigator.geolocation) {

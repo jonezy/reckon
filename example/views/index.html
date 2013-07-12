@@ -3,52 +3,34 @@
 {% block content %}
 {% if results && fullResults %} 
 <div class="row">
-  <h1>{{ location }} <small>{{ date_converter(results.currently.time }}</small></h1>
-  <h2>Right now?  <strong class="text-info">{{ results.currently.summary}}</strong></h2>
+  <h1>It's {{ date_converter(results.currently.time }} in {{ location }} <small></small></h1>
+  <h2>Right now it's <strong class="text-info">{{ results.currently.summary}}</strong> <strong class="text-success">{{ Math.round(results.currently.temperature) }}&deg;</strong></h2>
   <h2>Real soon? <strong class="text-info">{{ results.minutely.summary}}</strong></h2>
-  <h3><strong class="text-info">{{ results.hourly.summary}}</strong></h3>
-
+  <h3><strong class="text-info">{{ results.hourly.summary}}</strong> with a high of <strong class="text-success">{{ todaysHigh }}&deg;</strong> and a low of <strong class="text-warning">{{ todaysLow }}&deg;</strong></h3>
+</div>
+<div class="row">
+  <div style="margin-left:-10px;" class="column16">
+    {% for d in results.daily.data %}
+    <div style="margin-bottom:10px;" class="well well-small column3">
+    {{ date_converter(d.time) }} <br /> {{ d.summary }}<br />
+    High: {{ Math.round(d.temperatureMax) }}&deg;<br />
+    Low: {{ Math.round(d.temperatureMin) }}&deg;<br />
+    </div>
+    {% endfor %}
+  </div>
 </div>
 <div class="row">
   <div class="column16">
-    <h3> {{ date_converter(results.currently.time }}</h3>
-  </div>
-  <div class="column4">
-    <h4>Current</h4>
-    <p>{{ results.currently.summary}}</p>
-  </div>
-  <div class="column4">
-    <h4>Soon</h4>
-    <p>{{ results.minutely.summary}}</p>
-  </div>
-  <div class="column4">
-    <h4>Later</h4>
-    <p>{{ results.hourly.summary}}</p>
-    {% for d in results.hourly.data %}
-    {{ time_converter(d.time) }}  <br /> {{ d.summary }} {{ parseInt(d.temperature) }}&deg;<br /><br />
-    {% endfor %}
-  </div>
-  <div class="column4">
-    <h4>This week</h4>
-    <p>{{ results.daily.summary}}</p>
-    {% for d in results.daily.data %}
-    {{ date_converter(d.time) }} <br /> {{ d.summary }}<br /><br />
-    {% endfor %}
+    <pre>
+        {{ fullResults }}
+    </pre>
   </div>
 </div>
- <div class="row">
-    <div class="column16">
-      <pre>
-        {{ fullResults }}
-      </pre>
-    </div>
- </div>
- {% else %}
- <div class="row">
-   <div class="column16">
-     <h1>Figuring out where you are and getting you some data...</h1>
-   </div>
-
- </div>
- {% endif %}
+{% else %}
+<div class="row">
+  <div class="column16">
+    <h1>Figuring out where you are and getting you some data...</h1>
+  </div>
+</div>
+{% endif %}
 {% endblock %}
