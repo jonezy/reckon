@@ -11,7 +11,7 @@
 <div class="row">
   <div style="margin-left:-10px;" class="column16">
     {% for d in results.daily.data %}
-    <div style="margin-bottom:10px;" class="well well-small column3">
+    <div style="margin-bottom:20px;" class="well well-small column3">
     {{ date_converter(d.time) }} <br /> {{ d.summary }}<br />
     High: {{ Math.round(d.temperatureMax) }}&deg;<br />
     Low: {{ Math.round(d.temperatureMin) }}&deg;<br />
