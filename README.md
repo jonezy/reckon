@@ -1,18 +1,14 @@
 # Reckon
 
-Reckon is a wrapper for the [forecast.io
-api](http://developer.forecast.io). It
+Reckon is a wrapper for the [forecast.io api](http://developer.forecast.io). It
 provides a simple way of accessing the amazing weather data they
 provide!
 
     // instantiate reckon like so
-    var reckoner = new Reckon({apiKey:'your api key from
-developer.forecast.io});
+    var reckoner = new Reckon({apiKey:'your api key fromdeveloper.forecast.io});
     
-    
-    // call the api using the named endpoint and parameters + token!
-    moves.get({lat:'valid lat',lon:'valid long'}, 
-function(data){
+    // call the api lat + long and you'll get back weather data!
+    reckoner.get({lat:'valid lat',lon:'valid long'}, function(data){
       res.render('index', {'results':data});
     });
 
@@ -28,8 +24,8 @@ function(data){
     
 ### Setup settings.json
 
-Go to developer.forecast.io and register for an account.  After you register you will be at the developer dashboard, copy the api
-key from the bottom of the screen
+Go to developer.forecast.io and register for an account.  After you register you will be at the developer dashboard, 
+copy the api key from the bottom of the screen
 
     mv example/settings.local example/settings.json
     
