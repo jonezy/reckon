@@ -5,7 +5,7 @@ provides a simple way of accessing the amazing weather data they
 provide!
 
     // instantiate reckon like so
-    var reckoner = new Reckon({apiKey:'your api key fromdeveloper.forecast.io});
+    var reckoner = new Reckon({apiKey:'your api key from http://developer.forecast.io'});
     
     // call the api lat + long and you'll get back weather data!
     reckoner.get({lat:'valid lat',lon:'valid long'}, function(data){
